@@ -5,7 +5,7 @@ class User
     private $conn;
     private $table = 'usertable';
 
-    // Post Properties
+    // User Properties
     public $id;
     public $firstname;
     public $lastname;
@@ -22,10 +22,10 @@ class User
         $this->conn = $db;
     }
 
-    // Get Posts
+    // Get Users
     public function read()
     {
-        // Create query
+        // Create Query
         $query = 'SELECT u.id, u.firstname, u.lastname, u.email, u.address, u.mobile, u.package, u.carnivalid, u.reg_date
                     FROM ' . $this->table . ' u
                     ORDER BY
@@ -39,28 +39,28 @@ class User
 
         return $stmt;
     }
-    // Get Single Post
+    // Get Single User
     public function read_single()
     {
-        // Create query
+        // Create Query
         $query = 'SELECT u.id, u.firstname, u.lastname, u.email, u.address, u.mobile, u.package, u.carnivalid, u.reg_date
                     FROM ' . $this->table . ' u
                     WHERE
                         u.carnivalid = ?
                     LIMIT 0,1';
 
-        // Prepare statement
+        // Prepare Statement
         $stmt = $this->conn->prepare($query);
 
         // Bind ID
         $stmt->bindParam(1, $this->carnivalid);
 
-        // Execute query
+        // Execute Query
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Set properties
+        // Set Properties
         $this->id = $row['id'];
         $this->firstname = $row['firstname'];
         $this->lastname = $row['lastname'];

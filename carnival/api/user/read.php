@@ -6,23 +6,23 @@ header('Content-Type: application/json');
 include_once '../../config/Database.php';
 include_once '../../models/User.php';
 
-// Instantiate DB & connect
+// Instantiate DB & Connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate blog post object
+// Instantiate User Object
 $user = new User($db);
 
-// Blog post query
+// User Query
 $result = $user->read();
-// Get row count
+// Get Row Count
 $num = $result->rowCount();
 
-// Check if any posts
+// Check If Any User Exists
 if ($num > 0) {
-    // Post array
+    // Users Array
     $users_arr = array();
-    // $posts_arr['data'] = array();
+    // $users_arr['data'] = array();
 
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
@@ -41,13 +41,13 @@ if ($num > 0) {
 
         // Push to "data"
         array_push($users_arr, $user_item);
-        // array_push($posts_arr['data'], $post_item);
+        // array_push($users_arr['data'], $user_item);
     }
 
     // Turn to JSON & output
     echo json_encode($users_arr);
 } else {
-    // No Posts
+    // No Users
     echo json_encode(
         array('message' => 'No User Found')
     );
