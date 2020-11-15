@@ -4,8 +4,8 @@ class Database
     // DB Params
     private $host = 'localhost';
     private $db_name = 'sqldb';
-    private $username = 'ammer';
-    private $password = 'Ammer!1412';
+    private $username = '';
+    private $password = '';
     private $conn;
 
     // DB Connect
